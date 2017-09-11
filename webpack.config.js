@@ -7,19 +7,21 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
 
   entry: {
-    app: './index.js',
+    app: [
+      'webpack-hot-middleware/client?reload=true',
+      './index.jsx'
+    ],
     styles: './index.less',
     vendor: ['lodash']
   },
 
   output: {
     path: path.join(__dirname, 'build'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
 
   devtool: 'eval',
-
-  watch: true,
 
   module: {
     rules: [
@@ -46,7 +48,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.less']
   },
 
   plugins: [
@@ -62,6 +64,10 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'styles.css',
       allChunks: true
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
