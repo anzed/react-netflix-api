@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -28,10 +27,7 @@ module.exports = {
       {
         test: /\.less$/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader']
-        })
+        use: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.jsx?$/,
@@ -61,13 +57,10 @@ module.exports = {
       hash: true,
       template: './index.html'
     }),
-    new ExtractTextPlugin({
-      filename: 'styles.css',
-      allChunks: true
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]
 };
