@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class FilmItem extends React.Component {
   render() {
@@ -16,5 +17,14 @@ class FilmItem extends React.Component {
     );
   }
 }
+
+FilmItem.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    year: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired
+  }).isRequired
+};
 
 export default FilmItem;
