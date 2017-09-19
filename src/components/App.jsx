@@ -3,15 +3,17 @@ import Header from './header/Header';
 import Filter from './filter/Filter';
 import FilmsList from './films-list/FilmsList';
 import Footer from './footer/Footer';
-import './App.less';
 
 class App extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <Header />
-        <Filter />
-        <FilmsList />
+        <div className="content">
+          <Header />
+          <Filter />
+          <FilmsList />
+          <div className="pre-footer" />
+        </div>
         <Footer />
       </div>
     );
