@@ -1,0 +1,31 @@
+header {
+  background-image: url('../../images/collage_film.jpg');
+  min-height: 400px;
+  position: relative;
+  width: 100%;
+
+  &:after {
+    background: rgba(0, 0, 0, .8);
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .header-container {
+    margin: auto;
+    position: relative;
+    width: @ntfx-layout__container-head;
+    z-index: 1;
+
+    .header-title {
+      color: @ntfx-color__pink;
+      font-size: 18px;
+      font-weight: 600;
+      padding-top: 20px;
+      margin-bottom: 70px;
+    }
+  }
+}

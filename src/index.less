@@ -1,1 +1,41 @@
+// Imports
 @import './components/App';
+@import './components/header/Header';
+@import './components/footer/Footer';
+@import './components/search-bar/SearchBar';
+@import './components/filter/Filter';
+@import './components/films-list/FilmsList';
+@import './components/film-item/FilmItem';
+@import './components/film-details/FilmDetails';
+@import './font/Ubuntu';
+
+// Color variables
+@ntfx-color__pink: #f55263;
+@ntfx-color__grey-mine-shaft: #3c3c3c;
+@ntfx-color__grey-wild-sand: #f5f5f5;
+@ntfx-color__grey-tundora: #414141;
+@ntfx-color__white: #ffffff;
+@ntfx-color__black: #000000;
+
+// Layout variables
+@ntfx-layout__container-head: 1100px;
+@ntfx-layout__container-main: 1250px;
+
+// Mixins
+.button(@padding-top, @padding-bottom, @color: @ntfx-color__white) {
+  border: none;
+  border-radius: 3px;
+  color: @color;
+  font-family: 'Ubuntu';
+  font-weight: 600;
+  padding: @padding-top @padding-bottom;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

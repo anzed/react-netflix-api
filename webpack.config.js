@@ -39,6 +39,13 @@ module.exports = {
             presets: ['env']
           }
         }
+      },
+      {
+        test: /\.(ttf||svg||png||jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]?[hash]'
+        }
       }
     ]
   },

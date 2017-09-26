@@ -1,0 +1,58 @@
+.search-bar {
+  .search-title {
+    color: @ntfx-color__white;
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  input {
+    background-color: rgba(0, 0, 0, .8);
+    border: none;
+    border-bottom: 3px solid transparent;
+    box-sizing: border-box;
+    color: @ntfx-color__white;
+    font: 20px 'Ubuntu';
+    height: 70px;
+    margin-bottom: 50px;
+    padding-left: 25px;
+    width: 100%;
+
+    &:focus {
+      border-bottom: 3px solid @ntfx-color__pink;
+      outline: none;
+    }
+  }
+
+  .search-params {
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    
+    .search-by {
+      align-self: center;
+
+      span {
+        color: @ntfx-color__white;
+        text-transform: uppercase;
+      }
+
+      button {
+        .button(7px, 35px);
+        background-color: @ntfx-color__grey-mine-shaft;
+        margin-left: 20px;
+  
+        &.active {
+          background-color: @ntfx-color__pink;
+        }
+      }
+    }
+    
+    .submit-button {
+      button {
+        .button(15px, 60px);
+        background-color: @ntfx-color__pink;
+      }
+    }
+  }
+}
