@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from '../search-bar/SearchBar';
+import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   render() {
@@ -7,11 +7,15 @@ class Header extends React.Component {
       <header>
         <div className="header-container">
           <div className="header-title">netflixroulette</div>
-          <SearchBar />
+          {this.props.children}
         </div>
       </header>
     );
   }
 }
+
+Header.propTypes = {
+  children: PropTypes.array.isRequired
+};
 
 export default Header;

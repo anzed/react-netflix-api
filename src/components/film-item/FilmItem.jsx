@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class FilmItem extends React.Component {
@@ -7,12 +8,14 @@ class FilmItem extends React.Component {
 
     return (
       <div className="film-item">
-        <div className="film-image" />
-        <div className="film-info">
-          <span className="film-title">{data.title}</span>
-          <span className="film-year">{data.year}</span>
-        </div>
-        <div className="film-genre">{data.genre}</div>
+        <Link to={`/film/${data.title}`}>
+          <div className="film-image" />
+          <div className="film-info">
+            <span className="film-title">{data.title}</span>
+            <span className="film-year">{data.year}</span>
+          </div>
+          <div className="film-genre">{data.genre}</div>
+        </Link>
       </div>
     );
   }

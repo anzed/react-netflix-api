@@ -1,7 +1,5 @@
 import React from 'react';
-import Header from './header/Header';
-import Filter from './filter/Filter';
-import FilmsList from './films-list/FilmsList';
+import PropTypes from 'prop-types';
 import Footer from './footer/Footer';
 
 class App extends React.Component {
@@ -9,9 +7,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <div className="content">
-          <Header />
-          <Filter />
-          <FilmsList />
+          {this.props.children}
           <div className="pre-footer" />
         </div>
         <Footer />
@@ -19,5 +15,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.array.isRequired
+};
 
 export default App;

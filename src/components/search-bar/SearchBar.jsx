@@ -22,13 +22,15 @@ class SearchBar extends React.Component {
     });
   }
 
-  submitSearch() {}
+  submitSearch() {
+    this.props.history.push(`/search/${this.inputElement.value}`);
+  }
 
   render() {
     return (
       <div className="search-bar">
         <div className="search-title">Find your movie</div>
-        <TextInput />
+        <TextInput inputRef={el => this.inputElement = el} />
         <div className="search-params">
           <div className="search-by">
             <span>Search by</span>
