@@ -24,7 +24,7 @@ class SearchBar extends React.Component {
   }
 
   submitSearch() {
-    this.props.match.history.push(`/search/${this.inputElement.value}`);
+    this.props.history.push(`/search/${this.inputElement.value}`);
   }
 
   render() {
@@ -56,9 +56,7 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
-  match: PropTypes.shape({
-    history: PropTypes.object.isRequired
-  }).isRequired
+  history: PropTypes.object.isRequired
 };
 
 export default SearchBar;

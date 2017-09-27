@@ -1,5 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
+import SearchBar from '../search-bar/SearchBar';
+import FilmDetails from '../film-details/FilmDetails';
 
 class Header extends React.Component {
   render() {
@@ -7,15 +9,16 @@ class Header extends React.Component {
       <header>
         <div className="header-container">
           <div className="header-title">netflixroulette</div>
-          {this.props.children}
+          <Switch>
+            {['/', '/search/:searchQuery'].map((path, index) =>
+              <Route exact path={path} component={SearchBar} key={index} />
+            )}
+            <Route path="/film/:filmName" component={FilmDetails} />
+          </Switch>
         </div>
       </header>
     );
   }
 }
-
-Header.propTypes = {
-  children: PropTypes.array.isRequired
-};
 
 export default Header;

@@ -1,5 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Header from './header/Header';
+import Filter from './filter/Filter';
+import NoResult from './no-result/NoResult';
+import FilmsList from './films-list/FilmsList';
 import Footer from './footer/Footer';
 
 class App extends React.Component {
@@ -7,7 +11,15 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <div className="content">
-          {this.props.children}
+          <Header />
+          <Route path="/" component={Filter} />
+          <Switch>
+            <Route exact path="/" component={NoResult} />
+            {['/film/:filmName', '/search/:searchQuery'].map((path, index) =>
+              <Route exact path={path} component={FilmsList} key={index} />
+            )}
+            <Redirect from="*" to="/" />
+          </Switch>
           <div className="pre-footer" />
         </div>
         <Footer />
@@ -15,9 +27,5 @@ class App extends React.Component {
     );
   }
 }
-
-App.propTypes = {
-  children: PropTypes.array.isRequired
-};
 
 export default App;

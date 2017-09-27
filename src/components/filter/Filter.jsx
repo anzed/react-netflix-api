@@ -22,7 +22,7 @@ class Filter extends React.Component {
   }
 
   renderFilter() {
-    const path = this.props.match.match.path;
+    const path = this.props.location.pathname;
 
     if (path.match('search')) {
       return (
@@ -58,8 +58,8 @@ class Filter extends React.Component {
 }
 
 Filter.propTypes = {
-  match: PropTypes.shape({
-    match: PropTypes.object
+  location: PropTypes.shape({
+    pathname: PropTypes.string
   }).isRequired
 };
 
