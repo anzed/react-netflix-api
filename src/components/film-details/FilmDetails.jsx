@@ -1,9 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class FilmDetails extends React.Component {
   render() {
     return (
       <div className="film-details">
+        <Link to="/">
+          <div className="to-search">
+            Search
+          </div>
+        </Link>
         <div className="film-image" />
         <div className="film-description">
           <div className="details-head">

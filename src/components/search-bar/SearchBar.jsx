@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../common/Button';
 import TextInput from '../common/TextInput';
 
@@ -22,13 +23,15 @@ class SearchBar extends React.Component {
     });
   }
 
-  submitSearch() {}
+  submitSearch() {
+    this.props.history.push(`/search/${this.inputElement.value}`);
+  }
 
   render() {
     return (
       <div className="search-bar">
         <div className="search-title">Find your movie</div>
-        <TextInput />
+        <TextInput inputRef={el => this.inputElement = el} />
         <div className="search-params">
           <div className="search-by">
             <span>Search by</span>
@@ -51,5 +54,9 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default SearchBar;
