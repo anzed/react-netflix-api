@@ -1,9 +1,9 @@
 import * as types from '../constants/ActionTypes';
 
-export const filmsAreFetching = (isLoading) => {
+export const filmsAreFetching = (areFetching) => {
   return {
     type: types.FILMS_ARE_FETCHING,
-    isLoading
+    areFetching
   };
 };
 
