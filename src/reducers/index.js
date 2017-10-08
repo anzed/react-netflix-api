@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import films from './filmsReducers';
+import { fetchFilmsError, fetchFilmsSuccess, filmsAreFetching } from './filmsReducers';
 
 const rootReducer = combineReducers({
-  films
+  fetchFilmsError,
+  fetchFilmsSuccess,
+  filmsAreFetching
 });
 
 export default rootReducer;

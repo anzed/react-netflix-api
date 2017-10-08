@@ -26,10 +26,10 @@ export const fetchFilms = (url) => {
     dispatch(filmsAreFetching(true));
 
     fetch(url)
-      .then(response => {
-        response.ok ?
-          dispatch(filmsAreFetching(false)) :
-          throw Error(response.statusText);
+      .then((response) => {
+        if (response.ok) {
+          dispatch(filmsAreFetching(false));
+        }
 
         return response;
       })

@@ -24,7 +24,10 @@ class SearchBar extends React.Component {
   }
 
   submitSearch() {
+    const url = 'https://netflixroulette.net/api/api.php?title=';
+
     this.props.history.push(`/search/${this.inputElement.value}`);
+    this.props.actions.fetchFilms(url + this.inputElement.value);
   }
 
   render() {
@@ -56,6 +59,7 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
+  actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
 
