@@ -1,11 +1,18 @@
 import { combineReducers } from 'redux';
-import { fetchFilmsError, fetchFilmsSuccess, filmsAreFetching, changeSearchBy } from './filmsReducers';
+import {
+  fetchFilmsError,
+  fetchFilmsSuccess,
+  filmsAreFetching,
+  changeSearchBy,
+  selectFilm
+} from './filmsReducers';
 
 const rootReducer = combineReducers({
   fetchFilmsError,
   fetchFilmsSuccess,
   filmsAreFetching,
-  changeSearchBy
+  changeSearchBy,
+  selectFilm
 });
 
 export default rootReducer;

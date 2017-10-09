@@ -9,7 +9,7 @@ class FilmsList extends React.Component {
     const hasErrored = this.props.hasErrored;
 
     return films.length > 0 || !hasErrored ?
-      films.map(film => <FilmItem data={film} key={film.show_id} />) :
+      films.map(film => <FilmItem data={film} key={film.show_id} actions={this.props.actions} />) :
       <NoResult />;
   }
 
@@ -31,7 +31,8 @@ class FilmsList extends React.Component {
 FilmsList.propTypes = {
   films: PropTypes.array.isRequired,
   areFetching: PropTypes.bool.isRequired,
-  hasErrored: PropTypes.bool.isRequired
+  hasErrored: PropTypes.bool.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 export default FilmsList;

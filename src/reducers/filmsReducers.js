@@ -35,3 +35,12 @@ export const changeSearchBy = (state = 'title', action) => {
       return state;
   }
 };
+
+export const selectFilm = (state = {}, action) => {
+  switch (action.type) {
+    case types.SELECT_FILM:
+      return action.selectedFilm;
+    default:
+      return state;
+  }
+};

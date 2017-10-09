@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import SearchBar from '../search-bar/SearchBar';
 import FilmDetails from '../film-details/FilmDetails';
 
@@ -21,10 +22,17 @@ const Header = props => (
                 searchBy={props.searchBy} />
             )} />)
         )}
-        <Route path="/film/:filmName" component={FilmDetails} />
+        <Route path="/film/:filmName">
+          <FilmDetails actions={props.actions} selectedFilm={props.selectedFilm} />
+        </Route>
       </Switch>
     </div>
   </header>
 );
+
+Header.propTypes = {
+  actions: PropTypes.object.isRequired,
+  selectedFilm: PropTypes.object.isRequired
+};
 
 export default Header;

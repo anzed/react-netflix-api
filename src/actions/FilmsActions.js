@@ -55,3 +55,10 @@ export const changeSearchBy = searchBy => (
     searchBy
   }
 );
+
+export const selectFilm = selectedFilm => (
+  {
+    type: types.SELECT_FILM,
+    selectedFilm
+  }
+);
