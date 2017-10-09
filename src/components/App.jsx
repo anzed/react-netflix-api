@@ -20,7 +20,11 @@ class App extends React.Component {
             actions={this.props.actions}
             searchBy={this.props.searchBy}
             selectedFilm={this.props.selectedFilm} />
-          <Route path="/" component={Filter} />
+          <Route
+            path="/"
+            render={history => (
+              <Filter counter={this.props.films.length} history={history} />
+            )} />
           <Switch>
             <Route exact path="/" component={NoResult} />
             {['/film/:filmName', '/search/:searchQuery'].map((path, index) =>

@@ -22,13 +22,18 @@ class Filter extends React.Component {
   }
 
   renderFilter() {
-    const path = this.props.location.pathname;
+    const path = this.props.history.location.pathname;
+    const counter = this.props.counter;
 
     if (path.match('search')) {
       return (
         <div className="filter-container">
           <div className="total-found">
-            Movies counter here
+            {
+              counter === 1 ?
+                `${counter} movie found` :
+                `${counter} movies found`
+            }
           </div>
           <div className="filter">
             <div className="sort-by">Sort by</div>
@@ -58,9 +63,8 @@ class Filter extends React.Component {
 }
 
 Filter.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string
-  }).isRequired
+  history: PropTypes.object.isRequired,
+  counter: PropTypes.number.isRequired
 };
 
 export default Filter;
