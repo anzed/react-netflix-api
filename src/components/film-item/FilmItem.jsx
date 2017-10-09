@@ -8,13 +8,13 @@ class FilmItem extends React.Component {
 
     return (
       <div className="film-item">
-        <Link to={`/film/${data.title}`}>
-          <div className="film-image" />
+        <Link to={`/film/${data.show_title}`}>
+          <div className="film-image" style={{ backgroundImage: `url(${data.poster})` }} />
           <div className="film-info">
-            <span className="film-title">{data.title}</span>
-            <span className="film-year">{data.year}</span>
+            <span className="film-title">{data.show_title}</span>
+            <span className="film-year">{data.release_year}</span>
           </div>
-          <div className="film-genre">{data.genre}</div>
+          <div className="film-genre">{data.category}</div>
         </Link>
       </div>
     );
@@ -23,10 +23,10 @@ class FilmItem extends React.Component {
 
 FilmItem.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    year: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired
+    show_id: PropTypes.number.isRequired,
+    show_title: PropTypes.string.isRequired,
+    release_year: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired
   }).isRequired
 };
 

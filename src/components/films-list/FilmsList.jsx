@@ -7,7 +7,7 @@ class FilmsList extends React.Component {
     const films = this.props.films;
 
     return films.length > 0 ?
-      films.map(film => <FilmItem data={film} key={film.id} />) :
+      films.map(film => <FilmItem data={film} key={film.show_id} />) :
       <div className="no-result">No films found</div>;
   }
 

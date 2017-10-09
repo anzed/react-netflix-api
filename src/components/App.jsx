@@ -11,25 +11,34 @@ import NoResult from './no-result/NoResult';
 import FilmsList from './films-list/FilmsList';
 import Footer from './footer/Footer';
 
-const App = ({ films, actions }) => (
-  <div className="app-container">
-    <div className="content">
-      <Header actions={actions} />
-      <Route path="/" component={Filter} />
-      <Switch>
-        <Route exact path="/" component={NoResult} />
-        {['/film/:filmName', '/search/:searchQuery'].map((path, index) =>
-          (<Route exact path={path} key={index}>
-            <FilmsList films={films} />
-          </Route>)
-        )}
-        <Redirect from="*" to="/" />
-      </Switch>
-      <div className="pre-footer" />
-    </div>
-    <Footer />
-  </div>
-);
+class App extends React.Component {
+  render() {
+    return (
+      <div className="app-container">
+        <div className="content">
+          <Header actions={this.props.actions} />
+          <Route path="/" component={Filter} />
+          <Switch>
+            <Route exact path="/" component={NoResult} />
+            {['/film/:filmName', '/search/:searchQuery'].map((path, index) =>
+              (<Route exact path={path} key={index}>
+                <FilmsList films={this.props.films} />
+              </Route>)
+            )}
+            <Redirect from="*" to="/" />
+          </Switch>
+          <div className="pre-footer" />
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+}
+
+App.propTypes = {
+  films: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   films: state.fetchFilmsSuccess,
