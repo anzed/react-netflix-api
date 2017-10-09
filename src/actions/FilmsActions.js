@@ -45,6 +45,7 @@ export const fetchFilms = url => (
       .catch(() => {
         dispatch(filmsAreFetching(false));
         dispatch(fetchFilmsError(true));
+        dispatch(fetchFilmsSuccess([]));
       });
   }
 );
