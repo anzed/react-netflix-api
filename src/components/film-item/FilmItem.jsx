@@ -1,25 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { selectFilm } from '../../actions/FilmsActions';
 
 class FilmItem extends React.Component {
   constructor(props) {
     super(props);
 
-    this.selectFilm = this.selectFilm.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
-  selectFilm() {
+  clickHandler() {
     const film = this.props.data;
 
-    this.props.actions.selectFilm(film);
+    this.props.selectFilm(film);
   }
 
   render() {
     const data = this.props.data;
 
     return (
-      <div className="film-item" onClick={this.selectFilm} role="link" tabIndex="-1">
+      <div className="film-item" onClick={this.clickHandler} role="link" tabIndex="-1">
         <Link to={`/film/${data.show_title}`}>
           <div className="film-image" style={{ backgroundImage: `url(${data.poster})` }} />
           <div className="film-info">
@@ -40,9 +43,14 @@ FilmItem.propTypes = {
     release_year: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired
   }).isRequired,
-  actions: PropTypes.shape({
-    selectFilm: PropTypes.func.isRequired
-  }).isRequired
+  selectFilm: PropTypes.func.isRequired
 };
 
-export default FilmItem;
+const mapDispatchToProps = dispatch => ({
+  selectFilm: bindActionCreators(selectFilm, dispatch)
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(FilmItem);

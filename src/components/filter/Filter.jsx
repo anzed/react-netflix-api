@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Button from '../common/Button';
 
 class Filter extends React.Component {
@@ -22,7 +23,7 @@ class Filter extends React.Component {
   }
 
   searchView() {
-    const counter = this.props.counter;
+    const counter = this.props.films.length;
 
     return (
       <div className="filter-container">
@@ -59,7 +60,7 @@ class Filter extends React.Component {
   }
 
   renderFilter() {
-    const path = this.props.history.location.pathname;
+    const path = this.props.location.pathname;
 
     if (path.match('search')) {
       return this.searchView();
@@ -80,9 +81,18 @@ class Filter extends React.Component {
 }
 
 Filter.propTypes = {
-  history: PropTypes.object.isRequired,
-  counter: PropTypes.number.isRequired,
-  selectedFilm: PropTypes.object.isRequired
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  selectedFilm: PropTypes.object.isRequired,
+  films: PropTypes.array.isRequired
 };
 
-export default Filter;
+const mapStateToProps = state => ({
+  selectedFilm: state.selectFilm,
+  films: state.fetchFilmsSuccess,
+});
+
+export default connect(
+  mapStateToProps
+)(Filter);

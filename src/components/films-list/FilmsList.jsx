@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FilmItem from '../film-item/FilmItem';
 import NoResult from '../no-result/NoResult';
@@ -9,7 +10,7 @@ class FilmsList extends React.Component {
     const hasErrored = this.props.hasErrored;
 
     return films.length > 0 || !hasErrored ?
-      films.map(film => <FilmItem data={film} key={film.show_id} actions={this.props.actions} />) :
+      films.map(film => <FilmItem data={film} key={film.show_id} />) :
       <NoResult />;
   }
 
@@ -31,8 +32,15 @@ class FilmsList extends React.Component {
 FilmsList.propTypes = {
   films: PropTypes.array.isRequired,
   areFetching: PropTypes.bool.isRequired,
-  hasErrored: PropTypes.bool.isRequired,
-  actions: PropTypes.object.isRequired
+  hasErrored: PropTypes.bool.isRequired
 };
 
-export default FilmsList;
+const mapStateToProps = state => ({
+  films: state.fetchFilmsSuccess,
+  hasErrored: state.fetchFilmsError,
+  areFetching: state.filmsAreFetching
+});
+
+export default connect(
+  mapStateToProps
+)(FilmsList);

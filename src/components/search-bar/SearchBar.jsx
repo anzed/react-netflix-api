@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { changeSearchBy, fetchFilms } from '../../actions/FilmsActions';
 import Button from '../common/Button';
 import TextInput from '../common/TextInput';
 
@@ -14,7 +17,7 @@ class SearchBar extends React.Component {
   changeSearchParams(event) {
     const searchBy = event.target.innerHTML;
 
-    this.props.actions.changeSearchBy(searchBy);
+    this.props.changeSearchBy(searchBy);
   }
 
   submitSearch() {
@@ -22,7 +25,7 @@ class SearchBar extends React.Component {
     const url = `https://netflixroulette.net/api/api.php?${searchBy}=`;
 
     this.props.history.push(`/search/${this.inputElement.value}`);
-    this.props.actions.fetchFilms(url + this.inputElement.value);
+    this.props.fetchFilms(url + this.inputElement.value);
   }
 
   render() {
@@ -56,9 +59,22 @@ class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
-  actions: PropTypes.object.isRequired,
+  changeSearchBy: PropTypes.func.isRequired,
+  fetchFilms: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   searchBy: PropTypes.string.isRequired
 };
 
-export default SearchBar;
+const mapStateToProps = state => ({
+  searchBy: state.changeSearchBy
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeSearchBy: bindActionCreators(changeSearchBy, dispatch),
+  fetchFilms: bindActionCreators(fetchFilms, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchBar);
