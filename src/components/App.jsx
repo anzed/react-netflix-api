@@ -22,7 +22,10 @@ class App extends React.Component {
             <Route exact path="/" component={NoResult} />
             {['/film/:filmName', '/search/:searchQuery'].map((path, index) =>
               (<Route exact path={path} key={index}>
-                <FilmsList films={this.props.films} />
+                <FilmsList
+                  films={this.props.films}
+                  areFetching={this.props.areFetching}
+                  hasErrored={this.props.hasErrored} />
               </Route>)
             )}
             <Redirect from="*" to="/" />
@@ -38,7 +41,9 @@ class App extends React.Component {
 App.propTypes = {
   films: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
-  searchBy: PropTypes.string.isRequired
+  searchBy: PropTypes.string.isRequired,
+  areFetching: PropTypes.bool.isRequired,
+  hasErrored: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

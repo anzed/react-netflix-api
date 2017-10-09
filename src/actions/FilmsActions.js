@@ -42,7 +42,10 @@ export const fetchFilms = url => (
           [films]
       ))
       .then(films => dispatch(fetchFilmsSuccess(films)))
-      .catch(() => dispatch(fetchFilmsError(true)));
+      .catch(() => {
+        dispatch(filmsAreFetching(false));
+        dispatch(fetchFilmsError(true));
+      });
   }
 );
 
