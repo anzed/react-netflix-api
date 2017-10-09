@@ -45,3 +45,10 @@ export const fetchFilms = url => (
       .catch(() => dispatch(fetchFilmsError(true)));
   }
 );
+
+export const changeSearchBy = searchBy => (
+  {
+    type: types.CHANGE_SEARCH_BY,
+    searchBy
+  }
+);

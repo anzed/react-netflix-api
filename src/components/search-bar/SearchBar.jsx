@@ -7,30 +7,27 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      searchByTitle: true
-    };
-
     this.changeSearchParams = this.changeSearchParams.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
   }
 
-  changeSearchParams() {
-    const currentState = this.state.searchByTitle;
+  changeSearchParams(event) {
+    const searchBy = event.target.innerHTML;
 
-    this.setState({
-      searchByTitle: !currentState
-    });
+    this.props.actions.changeSearchBy(searchBy);
   }
 
   submitSearch() {
-    const url = 'https://netflixroulette.net/api/api.php?title=';
+    const searchBy = this.props.searchBy;
+    const url = `https://netflixroulette.net/api/api.php?${searchBy}=`;
 
     this.props.history.push(`/search/${this.inputElement.value}`);
     this.props.actions.fetchFilms(url + this.inputElement.value);
   }
 
   render() {
+    const searchBy = this.props.searchBy;
+
     return (
       <div className="search-bar">
         <div className="search-title">Find your movie</div>
@@ -41,11 +38,11 @@ class SearchBar extends React.Component {
             <Button
               text="title"
               onButtonClick={this.changeSearchParams}
-              active={this.state.searchByTitle} />
+              active={searchBy === 'title'} />
             <Button
               text="director"
               onButtonClick={this.changeSearchParams}
-              active={!this.state.searchByTitle} />
+              active={searchBy === 'director'} />
           </div>
           <div className="submit-button">
             <Button
@@ -60,7 +57,8 @@ class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  searchBy: PropTypes.string.isRequired
 };
 
 export default SearchBar;

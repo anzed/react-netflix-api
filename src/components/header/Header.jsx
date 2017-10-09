@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import SearchBar from '../search-bar/SearchBar';
@@ -14,7 +15,10 @@ const Header = props => (
             path={path}
             key={index}
             render={history => (
-              <SearchBar actions={props.actions} history={history.history} />
+              <SearchBar
+                actions={props.actions}
+                history={history.history}
+                searchBy={props.searchBy} />
             )} />)
         )}
         <Route path="/film/:filmName" component={FilmDetails} />

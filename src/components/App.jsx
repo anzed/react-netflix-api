@@ -16,7 +16,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <div className="content">
-          <Header actions={this.props.actions} />
+          <Header actions={this.props.actions} searchBy={this.props.searchBy} />
           <Route path="/" component={Filter} />
           <Switch>
             <Route exact path="/" component={NoResult} />
@@ -37,13 +37,15 @@ class App extends React.Component {
 
 App.propTypes = {
   films: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  searchBy: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   films: state.fetchFilmsSuccess,
   hasErrored: state.fetchFilmsError,
-  areFetching: state.filmsAreFetching
+  areFetching: state.filmsAreFetching,
+  searchBy: state.changeSearchBy
 });
 
 const mapDispatchToProps = dispatch => ({

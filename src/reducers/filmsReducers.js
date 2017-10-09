@@ -26,3 +26,12 @@ export const filmsAreFetching = (state = false, action) => {
       return state;
   }
 };
+
+export const changeSearchBy = (state = 'title', action) => {
+  switch (action.type) {
+    case types.CHANGE_SEARCH_BY:
+      return action.searchBy;
+    default:
+      return state;
+  }
+};
