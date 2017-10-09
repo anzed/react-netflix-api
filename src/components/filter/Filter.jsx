@@ -21,33 +21,50 @@ class Filter extends React.Component {
     });
   }
 
-  renderFilter() {
-    const path = this.props.history.location.pathname;
+  searchView() {
     const counter = this.props.counter;
 
-    if (path.match('search')) {
-      return (
-        <div className="filter-container">
-          <div className="total-found">
-            {
-              counter === 1 ?
-                `${counter} movie found` :
-                `${counter} movies found`
-            }
-          </div>
-          <div className="filter">
-            <div className="sort-by">Sort by</div>
-            <Button
-              text="release date"
-              onButtonClick={this.changeSortParams}
-              active={this.state.sortByRelease} />
-            <Button
-              text="rating"
-              onButtonClick={this.changeSortParams}
-              active={!this.state.sortByRelease} />
-          </div>
+    return (
+      <div className="filter-container">
+        <div className="total-found">
+          {
+            counter === 1 ?
+              `${counter} movie found` :
+              `${counter} movies found`
+          }
         </div>
-      );
+        <div className="filter">
+          <div className="sort-by">Sort by</div>
+          <Button
+            text="release date"
+            onButtonClick={this.changeSortParams}
+            active={this.state.sortByRelease} />
+          <Button
+            text="rating"
+            onButtonClick={this.changeSortParams}
+            active={!this.state.sortByRelease} />
+        </div>
+      </div>
+    );
+  }
+
+  filmDetailView() {
+    const selectedFilm = this.props.selectedFilm;
+
+    return (
+      <div className="filter-container">
+        <div className="films-by">Films by {selectedFilm.director}</div>
+      </div>
+    );
+  }
+
+  renderFilter() {
+    const path = this.props.history.location.pathname;
+
+    if (path.match('search')) {
+      return this.searchView();
+    } else if (path.match('film')) {
+      return this.filmDetailView();
     }
 
     return null;
@@ -64,7 +81,8 @@ class Filter extends React.Component {
 
 Filter.propTypes = {
   history: PropTypes.object.isRequired,
-  counter: PropTypes.number.isRequired
+  counter: PropTypes.number.isRequired,
+  selectedFilm: PropTypes.object.isRequired
 };
 
 export default Filter;

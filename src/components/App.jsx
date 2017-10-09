@@ -23,7 +23,10 @@ class App extends React.Component {
           <Route
             path="/"
             render={history => (
-              <Filter counter={this.props.films.length} history={history} />
+              <Filter
+                counter={this.props.films.length}
+                history={history}
+                selectedFilm={this.props.selectedFilm} />
             )} />
           <Switch>
             <Route exact path="/" component={NoResult} />
