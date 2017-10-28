@@ -22,7 +22,8 @@ class SearchBar extends React.Component {
 
   submitSearch() {
     const searchBy = this.props.searchBy;
-    const url = `https://netflixroulette.net/api/api.php?${searchBy}=`;
+    const apiKey = '16b7cd81c65bb2861400b8c44312045d';
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
 
     this.props.history.push(`/search/${this.inputElement.value}`);
     this.props.fetchFilms(url + this.inputElement.value);

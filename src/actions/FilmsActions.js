@@ -36,11 +36,7 @@ export const fetchFilms = url => (
         return response;
       })
       .then(response => response.json())
-      .then(films => (
-        Array.isArray(films) ?
-          films :
-          [films]
-      ))
+      .then(response => response.results)
       .then(films => dispatch(fetchFilmsSuccess(films)))
       .catch(() => {
         dispatch(filmsAreFetching(false));
@@ -61,5 +57,28 @@ export const selectFilm = selectedFilm => (
   {
     type: types.SELECT_FILM,
     selectedFilm
+  }
+);
+
+export const fetchFilmDetails = filmId => (
+  (dispatch) => {
+    dispatch(filmsAreFetching(true));
+
+    fetch(`https://api.themoviedb.org/3/movie/${filmId}?api_key=16b7cd81c65bb2861400b8c44312045d`)
+      .then((response) => {
+        if (response.ok) {
+          dispatch(filmsAreFetching(false));
+        } else {
+          throw new Error(response.statusText);
+        }
+
+        return response;
+      })
+      .then(response => response.json())
+      .then(film => dispatch(selectFilm(film)))
+      .catch(() => {
+        dispatch(filmsAreFetching(false));
+        dispatch(fetchFilmsError(true));
+      });
   }
 );

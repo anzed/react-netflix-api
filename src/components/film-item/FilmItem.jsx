@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { selectFilm } from '../../actions/FilmsActions';
+import { fetchFilmDetails } from '../../actions/FilmsActions';
 
 class FilmItem extends React.Component {
   constructor(props) {
@@ -15,21 +15,21 @@ class FilmItem extends React.Component {
   clickHandler() {
     const film = this.props.data;
 
-    this.props.selectFilm(film);
+    this.props.fetchFilmDetails(film.id);
   }
 
   render() {
     const data = this.props.data;
+    const posterPath = 'https://image.tmdb.org/t/p/w500';
 
     return (
       <div className="film-item" onClick={this.clickHandler} role="link" tabIndex="-1">
-        <Link to={`/film/${data.show_title}`}>
-          <div className="film-image" style={{ backgroundImage: `url(${data.poster})` }} />
+        <Link to={`/film/${data.title}`}>
+          <div className="film-image" style={{ backgroundImage: `url(${posterPath + data.poster_path})` }} />
           <div className="film-info">
-            <span className="film-title">{data.show_title}</span>
-            <span className="film-year">{data.release_year}</span>
+            <span className="film-title">{data.title}</span>
+            <span className="film-year">{data.release_date.slice(0, 4)}</span>
           </div>
-          <div className="film-genre">{data.category}</div>
         </Link>
       </div>
     );
@@ -38,16 +38,16 @@ class FilmItem extends React.Component {
 
 FilmItem.propTypes = {
   data: PropTypes.shape({
-    show_id: PropTypes.number.isRequired,
-    show_title: PropTypes.string.isRequired,
-    release_year: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string.isRequired
   }).isRequired,
-  selectFilm: PropTypes.func.isRequired
+  fetchFilmDetails: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  selectFilm: bindActionCreators(selectFilm, dispatch)
+  fetchFilmDetails: bindActionCreators(fetchFilmDetails, dispatch)
 });
 
 export default connect(

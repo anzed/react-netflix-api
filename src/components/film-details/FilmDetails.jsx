@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 const FilmDetails = (props) => {
   const film = props.selectedFilm;
+  const posterPath = 'https://image.tmdb.org/t/p/w500';
 
   return (
     <div className="film-details">
@@ -13,24 +14,20 @@ const FilmDetails = (props) => {
           Search
         </div>
       </Link>
-      <div className="film-image" style={{ backgroundImage: `url(${film.poster})` }} />
+      <div className="film-image" style={{ backgroundImage: `url(${posterPath + film.poster_path})` }} />
       <div className="film-description">
         <div className="details-head">
           <div className="title">
-            <span className="film-title">{film.show_title}</span>
-            <span className="rating">{film.rating}</span>
+            <span className="film-title">{film.title}</span>
+            <span className="rating">{film.vote_average}</span>
             <span className="genre">{film.category}</span>
           </div>
           <div className="subtitle">
-            <span className="year">{film.release_year}</span>
-            <span className="duration">{film.runtime}</span>
+            <span className="year">{film.release_date}</span>
+            <span className="duration">{film.runtime} min</span>
           </div>
         </div>
-        <div className="story">{film.summary}</div>
-        <div className="crew">
-          <div className="director">Director: {film.director}</div>
-          <div className="cast">Cast: {film.show_cast}</div>
-        </div>
+        <div className="story">{film.overview}</div>
       </div>
     </div>
   );
@@ -38,15 +35,13 @@ const FilmDetails = (props) => {
 
 FilmDetails.propTypes = {
   selectedFilm: PropTypes.shape({
-    poster: PropTypes.string,
-    show_title: PropTypes.string,
-    rating: PropTypes.string,
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    vote_average: PropTypes.number,
     category: PropTypes.string,
-    release_year: PropTypes.string,
-    runtime: PropTypes.string,
-    summary: PropTypes.string,
-    director: PropTypes.string,
-    cast: PropTypes.string,
+    release_date: PropTypes.string,
+    runtime: PropTypes.number,
+    overview: PropTypes.string,
   }).isRequired
 };
 
