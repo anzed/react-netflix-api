@@ -44,3 +44,12 @@ export const selectFilm = (state = {}, action) => {
       return state;
   }
 };
+
+export const sortByRelease = (state = true, action) => {
+  switch (action.type) {
+    case types.SORT_BY_RELEASE:
+      return action.byRelease;
+    default:
+      return state;
+  }
+};

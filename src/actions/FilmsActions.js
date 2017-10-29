@@ -83,3 +83,10 @@ export const fetchFilmDetails = filmId => (
       });
   }
 );
+
+export const sortByRelease = byRelease => (
+  {
+    type: types.SORT_BY_RELEASE,
+    byRelease
+  }
+);

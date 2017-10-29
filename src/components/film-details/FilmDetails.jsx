@@ -6,6 +6,7 @@ import { POSTER_URL } from '../../constants/Endpoints';
 
 const FilmDetails = (props) => {
   const film = props.selectedFilm;
+  const releaseYear = film.release_date ? film.release_date.slice(0, 4) : null;
 
   return (
     <div className="film-details">
@@ -25,7 +26,7 @@ const FilmDetails = (props) => {
             <span className="genre">{film.category}</span>
           </div>
           <div className="subtitle">
-            <span className="year">{film.release_date}</span>
+            <span className="year">{releaseYear}</span>
             <span className="duration">{film.runtime} min</span>
           </div>
         </div>

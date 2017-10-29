@@ -21,6 +21,7 @@ class FilmItem extends React.Component {
 
   render() {
     const data = this.props.data;
+    const releaseYear = data.release_date ? data.release_date.slice(0, 4) : null;
 
     return (
       <div className="film-item" onClick={this.clickHandler} role="link" tabIndex="-1">
@@ -28,7 +29,7 @@ class FilmItem extends React.Component {
           <div className="film-image" style={{ backgroundImage: `url(${POSTER_URL + data.poster_path})` }} />
           <div className="film-info">
             <span className="film-title">{data.title}</span>
-            <span className="film-year">{data.release_date.slice(0, 4)}</span>
+            <span className="film-year">{releaseYear}</span>
           </div>
         </Link>
       </div>

@@ -4,7 +4,8 @@ import {
   fetchFilmsSuccess,
   filmsAreFetching,
   changeSearchBy,
-  selectFilm
+  selectFilm,
+  sortByRelease
 } from './filmsReducers';
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   fetchFilmsSuccess,
   filmsAreFetching,
   changeSearchBy,
-  selectFilm
+  selectFilm,
+  sortByRelease
 });
 
 export default rootReducer;

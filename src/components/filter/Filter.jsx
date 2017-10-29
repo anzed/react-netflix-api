@@ -1,29 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Button from '../common/Button';
+import { sortByRelease } from '../../actions/FilmsActions';
 
 class Filter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      sortByRelease: true
-    };
-
     this.changeSortParams = this.changeSortParams.bind(this);
   }
 
   changeSortParams() {
-    const currentState = this.state.sortByRelease;
+    const byRelease = this.props.byRelease;
 
-    this.setState({
-      sortByRelease: !currentState
-    });
+    this.props.sortByRelease(!byRelease);
   }
 
   searchView() {
     const counter = this.props.films.length;
+    const byRelease = this.props.byRelease;
 
     return (
       <div className="filter-container">
@@ -39,22 +36,12 @@ class Filter extends React.Component {
           <Button
             text="release date"
             onButtonClick={this.changeSortParams}
-            active={this.state.sortByRelease} />
+            active={byRelease} />
           <Button
             text="rating"
             onButtonClick={this.changeSortParams}
-            active={!this.state.sortByRelease} />
+            active={!byRelease} />
         </div>
-      </div>
-    );
-  }
-
-  filmDetailView() {
-    const selectedFilm = this.props.selectedFilm;
-
-    return (
-      <div className="filter-container">
-        <div className="films-by">Films by {selectedFilm.director}</div>
       </div>
     );
   }
@@ -64,8 +51,6 @@ class Filter extends React.Component {
 
     if (path.match('search')) {
       return this.searchView();
-    } else if (path.match('film')) {
-      return this.filmDetailView();
     }
 
     return null;
@@ -85,14 +70,22 @@ Filter.propTypes = {
     pathname: PropTypes.string.isRequired
   }).isRequired,
   selectedFilm: PropTypes.object.isRequired,
-  films: PropTypes.array.isRequired
+  films: PropTypes.array.isRequired,
+  sortByRelease: PropTypes.func.isRequired,
+  byRelease: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   selectedFilm: state.selectFilm,
   films: state.fetchFilmsSuccess,
+  byRelease: state.sortByRelease
+});
+
+const mapDispatchToProps = dispatch => ({
+  sortByRelease: bindActionCreators(sortByRelease, dispatch)
 });
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Filter);
