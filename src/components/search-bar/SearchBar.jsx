@@ -48,7 +48,8 @@ class SearchBar extends React.Component {
             <Button
               text="director"
               onButtonClick={this.changeSearchParams}
-              active={searchBy === 'director'} />
+              active={searchBy === 'director'}
+              disabled={true} />
           </div>
           <div className="submit-button">
             <Button
