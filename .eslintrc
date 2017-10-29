@@ -2,7 +2,7 @@
   "extends": "airbnb",
   "rules": {
     "comma-dangle": 0,
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": 0,
     "react/jsx-closing-bracket-location": 0
   }
 }

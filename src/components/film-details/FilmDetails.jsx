@@ -14,7 +14,9 @@ const FilmDetails = (props) => {
           Search
         </div>
       </Link>
-      <div className="film-image" style={{ backgroundImage: `url(${POSTER_URL + film.poster_path})` }} />
+      <div
+        className="film-image"
+        style={{ backgroundImage: `url(${POSTER_URL + film.poster_path})` }} />
       <div className="film-description">
         <div className="details-head">
           <div className="title">
