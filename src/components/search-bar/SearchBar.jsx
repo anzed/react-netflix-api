@@ -35,7 +35,9 @@ class SearchBar extends React.Component {
     return (
       <div className="search-bar">
         <div className="search-title">Find your movie</div>
-        <TextInput inputRef={el => this.inputElement = el} />
+        <TextInput
+          inputRef={el => this.inputElement = el}
+          onPressEnter={this.submitSearch} />
         <div className="search-params">
           <div className="search-by">
             <span>Search by</span>

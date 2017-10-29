@@ -26,7 +26,9 @@ class FilmItem extends React.Component {
     return (
       <div className="film-item" onClick={this.clickHandler} role="link" tabIndex="-1">
         <Link to={`/film/${data.title}`}>
-          <div className="film-image" style={{ backgroundImage: `url(${POSTER_URL + data.poster_path})` }} />
+          <div
+            className="film-image"
+            style={{ backgroundImage: `url(${POSTER_URL + data.poster_path})` }} />
           <div className="film-info">
             <span className="film-title">{data.title}</span>
             <span className="film-year">{releaseYear}</span>
