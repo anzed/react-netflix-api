@@ -13,12 +13,15 @@ class Button extends React.Component {
   }
 
   render() {
+    const isActive = this.props.isActive;
+    const isDisabled = this.props.isDisabled;
+
     return (
       <button
-        className={this.props.active ? 'active' : null}
+        className={isActive ? 'active' : null}
         onClick={this.handleClick}
-        disabled={this.props.disabled}
-        title={this.props.disabled ? 'Currently unavailable' : ''}>
+        disabled={isDisabled}
+        title={isDisabled ? 'Currently unavailable' : ''}>
         {this.props.text}
       </button>
     );
@@ -26,15 +29,15 @@ class Button extends React.Component {
 }
 
 Button.defaultProps = {
-  active: false,
-  disabled: false
+  isActive: false,
+  isDisabled: false
 };
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
-  active: PropTypes.bool,
+  isActive: PropTypes.bool,
   onButtonClick: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  isDisabled: PropTypes.bool
 };
 
 export default Button;

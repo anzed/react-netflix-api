@@ -36,11 +36,11 @@ class Filter extends React.Component {
           <Button
             text="release date"
             onButtonClick={this.changeSortParams}
-            active={byRelease} />
+            isActive={byRelease} />
           <Button
             text="rating"
             onButtonClick={this.changeSortParams}
-            active={!byRelease} />
+            isActive={!byRelease} />
         </div>
       </div>
     );
@@ -69,7 +69,6 @@ Filter.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
   }).isRequired,
-  selectedFilm: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
   sortByRelease: PropTypes.func.isRequired,
   byRelease: PropTypes.bool.isRequired

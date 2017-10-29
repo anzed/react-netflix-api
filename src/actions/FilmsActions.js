@@ -63,13 +63,9 @@ export const selectFilm = selectedFilm => (
 
 export const fetchFilmDetails = filmId => (
   (dispatch) => {
-    dispatch(filmsAreFetching(true));
-
     fetch(`${FILM_DETAILS_URL + filmId}?${API_KEY}`)
       .then((response) => {
-        if (response.ok) {
-          dispatch(filmsAreFetching(false));
-        } else {
+        if (!response.ok) {
           throw new Error(response.statusText);
         }
 
@@ -78,7 +74,6 @@ export const fetchFilmDetails = filmId => (
       .then(response => response.json())
       .then(film => dispatch(selectFilm(film)))
       .catch(() => {
-        dispatch(filmsAreFetching(false));
         dispatch(fetchFilmsError(true));
       });
   }
