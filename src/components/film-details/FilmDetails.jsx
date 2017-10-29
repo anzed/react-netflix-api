@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { POSTER_URL } from '../../constants/Endpoints';
 
 const FilmDetails = (props) => {
   const film = props.selectedFilm;
-  const posterPath = 'https://image.tmdb.org/t/p/w500';
 
   return (
     <div className="film-details">
@@ -14,7 +14,7 @@ const FilmDetails = (props) => {
           Search
         </div>
       </Link>
-      <div className="film-image" style={{ backgroundImage: `url(${posterPath + film.poster_path})` }} />
+      <div className="film-image" style={{ backgroundImage: `url(${POSTER_URL + film.poster_path})` }} />
       <div className="film-description">
         <div className="details-head">
           <div className="title">

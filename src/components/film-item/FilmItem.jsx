@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchFilmDetails } from '../../actions/FilmsActions';
+import { POSTER_URL } from '../../constants/Endpoints';
 
 class FilmItem extends React.Component {
   constructor(props) {
@@ -20,12 +21,11 @@ class FilmItem extends React.Component {
 
   render() {
     const data = this.props.data;
-    const posterPath = 'https://image.tmdb.org/t/p/w500';
 
     return (
       <div className="film-item" onClick={this.clickHandler} role="link" tabIndex="-1">
         <Link to={`/film/${data.title}`}>
-          <div className="film-image" style={{ backgroundImage: `url(${posterPath + data.poster_path})` }} />
+          <div className="film-image" style={{ backgroundImage: `url(${POSTER_URL + data.poster_path})` }} />
           <div className="film-info">
             <span className="film-title">{data.title}</span>
             <span className="film-year">{data.release_date.slice(0, 4)}</span>

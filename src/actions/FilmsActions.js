@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import { API_KEY, FILM_DETAILS_URL } from '../constants/Endpoints';
 
 export const filmsAreFetching = areFetching => (
   {
@@ -64,7 +65,7 @@ export const fetchFilmDetails = filmId => (
   (dispatch) => {
     dispatch(filmsAreFetching(true));
 
-    fetch(`https://api.themoviedb.org/3/movie/${filmId}?api_key=16b7cd81c65bb2861400b8c44312045d`)
+    fetch(`${FILM_DETAILS_URL + filmId}?${API_KEY}`)
       .then((response) => {
         if (response.ok) {
           dispatch(filmsAreFetching(false));

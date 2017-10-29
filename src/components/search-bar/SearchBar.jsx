@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { changeSearchBy, fetchFilms } from '../../actions/FilmsActions';
 import Button from '../common/Button';
 import TextInput from '../common/TextInput';
+import { API_KEY, SEARCH_BY_TITLE_URL } from '../../constants/Endpoints';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -22,8 +23,7 @@ class SearchBar extends React.Component {
 
   submitSearch() {
     const searchBy = this.props.searchBy;
-    const apiKey = '16b7cd81c65bb2861400b8c44312045d';
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=`;
+    const url = `${SEARCH_BY_TITLE_URL}?${API_KEY}&query=`;
 
     this.props.history.push(`/search/${this.inputElement.value}`);
     this.props.fetchFilms(url + this.inputElement.value);
