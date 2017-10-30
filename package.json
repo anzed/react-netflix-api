@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "scripts": {
     "start": "node server",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "jest": {
     "moduleFileExtensions": [
