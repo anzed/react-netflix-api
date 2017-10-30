@@ -1,8 +1,20 @@
 {
   "name": "react-netflix-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tests/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/src/"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/src/images/",
+      "<rootDir>/src/font/"
+    ]
   },
   "license": "ISC",
   "dependencies": {
