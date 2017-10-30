@@ -1,35 +1,58 @@
+/* eslint class-methods-use-this: 0 */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import FilmItem from '../film-item/FilmItem';
+import NoResult from '../no-result/NoResult';
 
 class FilmsList extends React.Component {
-  constructor(props) {
-    super(props);
+  sortByRelease(a, b) {
+    return parseInt(b.release_date.slice(0, 4), 10) - parseInt(a.release_date.slice(0, 4), 10);
+  }
 
-    this.state = {
-      films: [
-        { id: 1, title: 'First item', year: '2004', genre: 'Action' },
-        { id: 2, title: 'Second item', year: '2001', genre: 'Adventure' },
-        { id: 3, title: 'Third item', year: '2012', genre: 'Historic' },
-        { id: 4, title: 'Fourth item', year: '2009', genre: 'Detective' }
-      ]
-    };
+  sortByRating(a, b) {
+    return b.vote_average - a.vote_average;
   }
 
   renderList() {
-    const films = this.state.films;
+    const films = this.props.films;
+    const hasErrored = this.props.hasErrored;
+    const sortBy = this.props.byRelease ? this.sortByRelease : this.sortByRating;
 
-    return films.length > 0 ?
-      films.map(film => <FilmItem data={film} key={film.id} />) :
-      <div className="no-result">No films found</div>;
+    return films.length > 0 || !hasErrored ?
+      films.sort(sortBy).map(film => <FilmItem data={film} key={film.id} />) :
+      <NoResult />;
   }
 
   render() {
+    const areFetching = this.props.areFetching;
+
     return (
       <div className="films-list">
-        {this.renderList()}
+        {
+          areFetching ?
+            <div className="loading-message">Loading, please wait...</div> :
+            this.renderList()
+        }
       </div>
     );
   }
 }
 
-export default FilmsList;
+FilmsList.propTypes = {
+  films: PropTypes.array.isRequired,
+  areFetching: PropTypes.bool.isRequired,
+  hasErrored: PropTypes.bool.isRequired,
+  byRelease: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = state => ({
+  films: state.fetchFilmsSuccess,
+  hasErrored: state.fetchFilmsError,
+  areFetching: state.filmsAreFetching,
+  byRelease: state.sortByRelease
+});
+
+export default connect(
+  mapStateToProps
+)(FilmsList);

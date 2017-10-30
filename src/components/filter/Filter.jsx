@@ -1,48 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Button from '../common/Button';
+import { sortByRelease } from '../../actions/FilmsActions';
 
 class Filter extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      sortByRelease: true
-    };
-
     this.changeSortParams = this.changeSortParams.bind(this);
   }
 
   changeSortParams() {
-    const currentState = this.state.sortByRelease;
+    const byRelease = this.props.byRelease;
 
-    this.setState({
-      sortByRelease: !currentState
-    });
+    this.props.sortByRelease(!byRelease);
+  }
+
+  searchView() {
+    const counter = this.props.films.length;
+    const byRelease = this.props.byRelease;
+
+    return (
+      <div className="filter-container">
+        <div className="total-found">
+          {
+            counter === 1 ?
+              `${counter} movie found` :
+              `${counter} movies found`
+          }
+        </div>
+        <div className="filter">
+          <div className="sort-by">Sort by</div>
+          <Button
+            text="release date"
+            onButtonClick={this.changeSortParams}
+            isActive={byRelease} />
+          <Button
+            text="rating"
+            onButtonClick={this.changeSortParams}
+            isActive={!byRelease} />
+        </div>
+      </div>
+    );
   }
 
   renderFilter() {
     const path = this.props.location.pathname;
 
     if (path.match('search')) {
-      return (
-        <div className="filter-container">
-          <div className="total-found">
-            Movies counter here
-          </div>
-          <div className="filter">
-            <div className="sort-by">Sort by</div>
-            <Button
-              text="release date"
-              onButtonClick={this.changeSortParams}
-              active={this.state.sortByRelease} />
-            <Button
-              text="rating"
-              onButtonClick={this.changeSortParams}
-              active={!this.state.sortByRelease} />
-          </div>
-        </div>
-      );
+      return this.searchView();
     }
 
     return null;
@@ -59,8 +67,24 @@ class Filter extends React.Component {
 
 Filter.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string
-  }).isRequired
+    pathname: PropTypes.string.isRequired
+  }).isRequired,
+  films: PropTypes.array.isRequired,
+  sortByRelease: PropTypes.func.isRequired,
+  byRelease: PropTypes.bool.isRequired
 };
 
-export default Filter;
+const mapStateToProps = state => ({
+  selectedFilm: state.selectFilm,
+  films: state.fetchFilmsSuccess,
+  byRelease: state.sortByRelease
+});
+
+const mapDispatchToProps = dispatch => ({
+  sortByRelease: bindActionCreators(sortByRelease, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Filter);

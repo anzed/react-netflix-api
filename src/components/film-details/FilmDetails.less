@@ -4,18 +4,71 @@
   padding-bottom: 70px;
 
   .film-image {
-    background: @ntfx-color__grey-tundora;
+    background-position: center;
+    background-size: cover;
     display: inline-block;
     height: 500px;
     width: calc(~'33.3% - 50px');
   }
 
   .film-description {
-    background: @ntfx-color__grey-tundora;
+    color: @ntfx-color__white;
     display: inline-block;
     margin-left: 70px;
+    margin-top: 30px;
     min-height: 500px;
+    vertical-align: top;
     width: 50%;
+
+    .film-title {
+      color: @ntfx-color__pink;
+      font-size: 30px;
+    }
+
+    .rating {
+      border: 1px @ntfx-color__green-willow solid;
+      border-radius: 26px;
+      box-sizing: border-box;
+      color: @ntfx-color__green-willow;
+      display: inline-block;
+      font-size: 24px;
+      height: 50px;
+      line-height: 50px;
+      margin-left: 30px;
+      text-align: center;
+      width: 50px;
+    }
+
+    .genre {
+      color: @ntfx-color__gray-alto;
+      font-size: 20px;
+      display: block;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .duration {
+      margin-left: 20px;
+    }
+
+    .story {
+      color: @ntfx-color__gray-alto;
+      font-size: 18px;
+      margin-top: 40px;
+    }
+
+    .crew {
+      color: @ntfx-color__gray;
+      font-size: 18px;
+      margin-top: 40px;
+
+      .cast {
+        margin-top: 15px;
+      }
+    }
   }
 
   .to-search {
