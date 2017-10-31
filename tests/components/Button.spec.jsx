@@ -18,9 +18,18 @@ const setup = () => {
 };
 
 describe('Button component', () => {
-  it('should render', () => {
-    const { enzymeWrapper } = setup();
+  const { enzymeWrapper, props } = setup();
 
+  it('should render', () => {
     expect(enzymeWrapper.find('button').text()).toBe('button');
+    expect(enzymeWrapper.find('button').hasClass('active')).toBe(false);
+
+    enzymeWrapper.setProps({ isActive: true });
+    expect(enzymeWrapper.find('button').hasClass('active')).toBe(true);
+  });
+
+  it('should call onButtonClick when button is clicked', () => {
+    enzymeWrapper.find('button').simulate('click');
+    expect(props.onButtonClick.mock.calls.length).toBe(1);
   });
 });
