@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import FilmItem from '../film-item/FilmItem';
 import NoResult from '../no-result/NoResult';
 
-class FilmsList extends React.Component {
+export class FilmsList extends React.Component {
   sortByRelease(a, b) {
     return parseInt(b.release_date.slice(0, 4), 10) - parseInt(a.release_date.slice(0, 4), 10);
   }

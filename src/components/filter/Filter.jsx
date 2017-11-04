@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Button from '../common/Button';
 import { sortByRelease } from '../../actions/FilmsActions';
 
-class Filter extends React.Component {
+export class Filter extends React.Component {
   constructor(props) {
     super(props);
 

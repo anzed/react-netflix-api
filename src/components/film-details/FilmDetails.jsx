@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { POSTER_URL } from '../../constants/Endpoints';
 
-const FilmDetails = (props) => {
+export const FilmDetails = (props) => {
   const film = props.selectedFilm;
   const releaseYear = film.release_date ? film.release_date.slice(0, 4) : null;
 
