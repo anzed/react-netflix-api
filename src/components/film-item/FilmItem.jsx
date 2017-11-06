@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { fetchFilmDetails } from '../../actions/FilmsActions';
 import { POSTER_URL } from '../../constants/Endpoints';
 
-class FilmItem extends React.Component {
+export class FilmItem extends React.Component {
   constructor(props) {
     super(props);
 

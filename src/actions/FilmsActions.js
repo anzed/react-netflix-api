@@ -1,3 +1,4 @@
+/* eslint no-undef:0 */
 import * as types from '../constants/ActionTypes';
 import { API_KEY, FILM_DETAILS_URL } from '../constants/Endpoints';
 
@@ -26,7 +27,7 @@ export const fetchFilms = url => (
   (dispatch) => {
     dispatch(filmsAreFetching(true));
 
-    fetch(url)
+    return fetch(url)
       .then((response) => {
         if (response.ok) {
           dispatch(filmsAreFetching(false));
@@ -62,7 +63,7 @@ export const selectFilm = selectedFilm => (
 );
 
 export const fetchFilmDetails = filmId => (
-  (dispatch) => {
+  dispatch => (
     fetch(`${FILM_DETAILS_URL + filmId}?${API_KEY}`)
       .then((response) => {
         if (!response.ok) {
@@ -75,8 +76,8 @@ export const fetchFilmDetails = filmId => (
       .then(film => dispatch(selectFilm(film)))
       .catch(() => {
         dispatch(fetchFilmsError(true));
-      });
-  }
+      })
+  )
 );
 
 export const sortByRelease = byRelease => (
