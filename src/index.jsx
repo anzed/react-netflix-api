@@ -6,7 +6,8 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import App from './components/App';
 
-const store = configureStore();
+const store = configureStore(window.PRELOADED_STATE);
+delete window.PRELOADED_STATE;
 
 const render = () => {
   ReactDOM.render(

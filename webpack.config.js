@@ -1,23 +1,18 @@
 const webpack = require('webpack');
 const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
 
   entry: {
-    app: [
-      'webpack-hot-middleware/client?reload=true',
-      './index.jsx'
-    ],
+    app: './index.jsx',
     styles: './index.less',
     vendor: ['lodash']
   },
 
   output: {
     path: path.join(__dirname, 'build'),
-    filename: '[name].js',
-    publicPath: '/'
+    filename: '[name].js'
   },
 
   devtool: 'eval',
@@ -44,7 +39,7 @@ module.exports = {
         test: /\.(ttf||svg||png||jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
         options: {
-          name: '[path][name].[ext]?[hash]'
+          name: '[path][name].[ext]'
         }
       }
     ]
@@ -59,15 +54,6 @@ module.exports = {
       name: ['common', 'vendor'],
       minChunks: 2
     }),
-    new HTMLWebpackPlugin({
-      title: 'Netflix API App',
-      hash: true,
-      template: './index.html'
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
   ]
 };
